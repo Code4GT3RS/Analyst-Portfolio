@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Data Analyst · Marketing Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #080c10;
+  --bg2:      #0e1419;
+  --bg3:      #141b22;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.12);
+  --teal:     #00d4aa;
+  --teal-dim: rgba(0,212,170,0.12);
+  --teal-glow:rgba(0,212,170,0.06);
+  --white:    #f0f4f8;
+  --muted:    #8a96a3;
+  --muted2:   #5a6470;
+  --accent:   #1e8fff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,12,16,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: .08em;
+  color: var(--white);
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-logo span { color: var(--teal); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 9px 20px;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+
+.nav-cta:hover { background: var(--teal); color: var(--bg); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 120px 48px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(0,212,170,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-tag::before {
+  content: '';
+  display: block;
+  width: 28px; height: 1px;
+  background: var(--teal);
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(42px, 5.5vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  margin-bottom: 24px;
+  color: var(--white);
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--teal);
+}
+
+.hero-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 440px;
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  background: var(--teal);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity .2s, transform .15s;
+  display: inline-block;
+}
+
+.btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+
+.btn-ghost {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color .2s, color .2s;
+  display: inline-block;
+}
+
+.btn-ghost:hover { border-color: var(--white); }
+
+.hero-status {
+  position: absolute;
+  bottom: 48px; left: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--muted2);
+  letter-spacing: .05em;
+}
+
+.status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: pulse 2.4s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+
+/* Hero visual */
+.hero-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-chart {
+  width: 340px;
+  height: 280px;
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  padding: 24px;
+  position: relative;
+}
+
+.hero-chart::before {
+  content: 'MARKETING INTELLIGENCE';
+  position: absolute;
+  top: 16px; left: 20px;
+  font-size: 9px;
+  letter-spacing: .18em;
+  color: var(--muted2);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 180px;
+  margin-top: 40px;
+}
+
+.bar {
+  flex: 1;
+  background: var(--bg3);
+  border-top: 2px solid var(--teal);
+  position: relative;
+  transition: height .4s ease;
+  animation: barRise .8s ease forwards;
+  transform-origin: bottom;
+}
+
+.bar:nth-child(1) { height: 40%; animation-delay: .1s; }
+.bar:nth-child(2) { height: 65%; animation-delay: .2s; }
+.bar:nth-child(3) { height: 45%; animation-delay: .3s; }
+.bar:nth-child(4) { height: 80%; animation-delay: .4s; }
+.bar:nth-child(5) { height: 55%; animation-delay: .5s; }
+.bar:nth-child(6) { height: 90%; animation-delay: .6s; background: var(--teal-dim); border-color: var(--teal); }
+.bar:nth-child(7) { height: 70%; animation-delay: .7s; }
+
+@keyframes barRise {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+.chart-line {
+  position: absolute;
+  bottom: 24px; left: 24px; right: 24px;
+  height: 1px;
+  background: var(--border);
+}
+
+.chart-metric {
+  position: absolute;
+  top: 16px; right: 20px;
+  text-align: right;
+}
+
+.metric-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.metric-lbl {
+  font-size: 9px;
+  letter-spacing: .1em;
+  color: var(--muted2);
+  display: block;
+}
+
+/* ── SECTION COMMON ── */
+section {
+  padding: 100px 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-tag {
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.75;
+}
+
+/* ── WHAT I DO ── */
+.whatido {
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.whatido-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  margin-top: 64px;
+}
+
+.framework-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.framework-item {
+  display: flex;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: default;
+  transition: background .2s;
+}
+
+.framework-item:first-child { border-top: 1px solid var(--border); }
+
+.fi-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+  min-width: 28px;
+  margin-top: 2px;
+  letter-spacing: .05em;
+}
+
+.fi-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.fi-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.disciplines {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.disc-tag {
+  font-size: 11px;
+  letter-spacing: .06em;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color .2s, color .2s;
+}
+
+.disc-tag:hover { border-color: var(--teal); color: var(--teal); }
+
+.disc-head {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted2);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ── SKILLS ── */
+.skills { border-top: 1px solid var(--border); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 64px;
+  border: 1px solid var(--border);
+}
+
+.skill-card {
+  background: var(--bg);
+  padding: 32px 28px;
+  transition: background .2s;
+  cursor: default;
+}
+
+.skill-card:hover { background: var(--bg2); }
+
+.skill-icon {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.skill-icon svg { width: 18px; height: 18px; }
+
+.skill-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.skill-sub {
+  font-size: 11px;
+  color: var(--muted2);
+  letter-spacing: .04em;
+}
+
+/* ── PROJECTS ── */
+.projects {
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.projects-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 48px;
+}
+
+.projects-note {
+  font-size: 11px;
+  color: var(--muted2);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+
+.project-card {
+  background: var(--bg);
+  padding: 36px;
+  cursor: pointer;
+  transition: background .2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s ease;
+}
+
+.project-card:hover { background: var(--bg2); }
+.project-card:hover::before { transform: scaleX(1); }
+
+.project-preview {
+  height: 140px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mini chart previews */
+.mini-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+  height: 70px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.mini-bar {
+  flex: 1;
+  background: var(--teal-glow);
+  border-top: 1px solid var(--teal);
+}
+
+.mini-line {
+  width: 100%;
+  height: 70px;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.mini-line svg { width: 100%; height: 100%; }
+
+.mini-dots {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.mini-dot {
+  border-radius: 50%;
+  background: var(--teal);
+  opacity: 0.4;
+}
+
+.mini-dot:nth-child(3) { opacity: 1; transform: scale(1.4); }
+.mini-dot:nth-child(7) { opacity: .8; transform: scale(1.2); }
+.mini-dot:nth-child(12) { opacity: .6; transform: scale(1.1); }
+
+.mini-funnel {
+  width: 100%;
+  height: 70px;
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+}
+
+.funnel-bar {
+  height: 10px;
+  background: var(--teal-glow);
+  border-left: 2px solid var(--teal);
+  border-radius: 0 2px 2px 0;
+}
+
+.project-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.ptag {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  color: var(--muted2);
+}
+
+.project-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.project-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.project-link {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap .2s;
+}
+
+.project-link:hover { gap: 10px; }
+
+/* AutoProfile featured card */
+.project-card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.project-card.featured .project-preview {
+  margin-bottom: 0;
+  height: 200px;
+}
+
+/* ── CONTACT ── */
+.contact {
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 40px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+
+.form-group input,
+.form-group textarea {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  color: var(--white);
+  padding: 12px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color .2s;
+  resize: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus { border-color: var(--teal); }
+
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--muted2); }
+
+.contact-info {
+  margin-top: 40px;
+}
+
+.contact-label {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 32px;
+  display: block;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.ci-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+.ci-label {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-bottom: 3px;
+}
+
+.ci-value {
+  font-size: 14px;
+  color: var(--white);
+}
+
+.availability-card {
+  margin-top: 40px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  background: var(--teal-dim);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.av-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0;
+  animation: pulse 2s infinite;
+}
+
+.av-text { font-size: 12px; color: var(--teal); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 24px 48px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: var(--muted2);
+  letter-spacing: .04em;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-links a {
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+.footer-links a:hover { color: var(--white); }
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  nav .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 100px 20px 60px; }
+  .hero-visual { display: none; }
+  section { padding: 64px 20px; }
+  .whatido-grid { grid-template-columns: 1fr; gap: 40px; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.featured { grid-column: 1; grid-template-columns: 1fr; }
+  .contact { grid-template-columns: 1fr; gap: 40px; }
+  footer { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">Your<span>Name</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Connect</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" id="about">
+  <div class="hero-left">
+    <div class="hero-tag">Data Analytics · Marketing Intelligence</div>
+    <h1>Turning<br><em>marketing data</em><br>into decisions.</h1>
+    <p class="hero-sub">Functional and technical data analyst specializing in marketing intelligence — from PR and media to digital campaigns, advertising, and sales. I bridge the gap between raw data and strategy.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-chart">
+      <div class="chart-metric">
+        <div class="metric-val">+34%</div>
+        <span class="metric-lbl">Campaign ROI</span>
+      </div>
+      <div class="chart-bars">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <div class="chart-line"></div>
+    </div>
+  </div>
+  <div class="hero-status">
+    <div class="status-dot"></div>
+    Available for new opportunities
+  </div>
+</section>
+
+<!-- ── WHAT I DO ── -->
+<section class="whatido" id="about2">
+  <div class="fade-up">
+    <span class="section-tag">Expertise</span>
+    <h2 class="section-title">The analytical<br>framework</h2>
+    <p class="section-sub">I work across the full marketing communications stack — transforming fragmented channel data into clear, actionable intelligence.</p>
+  </div>
+  <div class="whatido-grid fade-up">
+    <div class="framework-list">
+      <div class="framework-item">
+        <div class="fi-num">01</div>
+        <div>
+          <div class="fi-title">Data Collection &amp; ETL</div>
+          <div class="fi-desc">Building pipelines that extract data from marketing platforms, CRMs, and ad networks — cleaning, transforming, and loading into structured databases for analysis.</div>
+        </div>
+      </div>
+      <div class="framework-item">
+        <div class="fi-num">02</div>
+        <div>
+          <div class="fi-title">Marketing Performance Analysis</div>
+          <div class="fi-desc">Measuring campaign effectiveness across paid, earned, and owned channels. Attribution modeling, funnel analysis, and ROI reporting across digital and traditional media.</div>
+        </div>
+      </div>
+      <div class="framework-item">
+        <div class="fi-num">03</div>
+        <div>
+          <div class="fi-title">Visualization &amp; Reporting</div>
+          <div class="fi-desc">Translating complex datasets into clear dashboards and executive-ready reports. Building Tableau visualizations that make insights immediately actionable for stakeholders.</div>
+        </div>
+      </div>
+      <div class="framework-item">
+        <div class="fi-num">04</div>
+        <div>
+          <div class="fi-title">Strategic Intelligence Delivery</div>
+          <div class="fi-desc">Synthesizing data across PR, sales, advertising, and communications into cohesive strategic briefs that inform media buys, creative direction, and campaign planning.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="disc-head">Industry Coverage</div>
+      <div class="disciplines">
+        <div class="disc-tag">Public Relations</div>
+        <div class="disc-tag">Digital Marketing</div>
+        <div class="disc-tag">Paid Advertising</div>
+        <div class="disc-tag">Sales Analytics</div>
+        <div class="disc-tag">Media Planning</div>
+        <div class="disc-tag">Brand Strategy</div>
+        <div class="disc-tag">Social Media</div>
+        <div class="disc-tag">Content ROI</div>
+        <div class="disc-tag">Email Marketing</div>
+        <div class="disc-tag">SEO / SEM</div>
+        <div class="disc-tag">Market Research</div>
+        <div class="disc-tag">Audience Data</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section class="skills" id="skills">
+  <div class="fade-up">
+    <span class="section-tag">Tech Stack</span>
+    <h2 class="section-title">Analytical tooling</h2>
+    <p class="section-sub">The technical toolkit behind every analysis — from database design to interactive dashboards.</p>
+  </div>
+  <div class="skills-grid fade-up">
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round">
+          <path d="M12 2C6.48 2 2 4.69 2 8s4.48 6 10 6 10-2.69 10-6-4.48-6-10-6z"/>
+          <path d="M2 8v8c0 3.31 4.48 6 10 6s10-2.69 10-6V8"/>
+          <path d="M2 12c0 3.31 4.48 6 10 6s10-2.69 10-6"/>
+        </svg>
+      </div>
+      <div class="skill-name">SQL</div>
+      <div class="skill-sub">PostgreSQL · Neon · Queries</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+      <div class="skill-name">Python</div>
+      <div class="skill-sub">pandas · ETL · Automation</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+          <polyline points="7 10 9 12 11 10 13 12 15 10 17 12"/>
+        </svg>
+      </div>
+      <div class="skill-name">Tableau</div>
+      <div class="skill-sub">Dashboards · Public · Viz</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <path d="M3 9h18M9 21V9"/>
+        </svg>
+      </div>
+      <div class="skill-name">Excel</div>
+      <div class="skill-sub">Pivot Tables · Formulas · VBA</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <div class="skill-name">Marketing APIs</div>
+      <div class="skill-sub">GA4 · Meta · Google Ads</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <div class="skill-name">Attribution</div>
+      <div class="skill-sub">UTM · Multi-touch · MMM</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round">
+          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+        </svg>
+      </div>
+      <div class="skill-name">GitHub</div>
+      <div class="skill-sub">Version Control · Pages</div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00d4aa" stroke-width="1.5" stroke-linecap="round">
+          <rect x="2" y="2" width="9" height="9" rx="1"/>
+          <rect x="13" y="2" width="9" height="9" rx="1"/>
+          <rect x="2" y="13" width="9" height="9" rx="1"/>
+          <rect x="13" y="13" width="9" height="9" rx="1"/>
+        </svg>
+      </div>
+      <div class="skill-name">Google Suite</div>
+      <div class="skill-sub">Analytics · Sheets · Stitch</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section class="projects" id="projects">
+  <div class="projects-header fade-up">
+    <div>
+      <span class="section-tag">Portfolio</span>
+      <h2 class="section-title">Selected projects</h2>
+    </div>
+    <div class="projects-note">Quantifying impact across channels</div>
+  </div>
+  <div class="projects-grid fade-up">
+
+    <!-- AutoProfile — Featured -->
+    <div class="project-card featured">
+      <div>
+        <div class="project-tags">
+          <span class="ptag">SQL</span>
+          <span class="ptag">Python</span>
+          <span class="ptag">Tableau</span>
+          <span class="ptag">ETL</span>
+        </div>
+        <div class="project-title">AutoProfile — Vehicle Data Intelligence Platform</div>
+        <div class="project-desc">End-to-end data platform aggregating safety ratings, recall history, fuel economy, and pricing across 200+ vehicles from NHTSA, DOE, and other government sources. Built with PostgreSQL on Neon, Python ETL pipeline using pandas, and Tableau Public dashboards embedded in a live GitHub Pages website.</div>
+        <a href="#" class="project-link">View Project →</a>
+      </div>
+      <div class="project-preview">
+        <div class="mini-bars">
+          <div class="mini-bar" style="height:35%"></div>
+          <div class="mini-bar" style="height:55%"></div>
+          <div class="mini-bar" style="height:42%"></div>
+          <div class="mini-bar" style="height:78%"></div>
+          <div class="mini-bar" style="height:60%"></div>
+          <div class="mini-bar" style="height:88%;background:rgba(0,212,170,0.2);border-color:#00d4aa"></div>
+          <div class="mini-bar" style="height:70%"></div>
+          <div class="mini-bar" style="height:50%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div class="project-preview">
+        <div class="mini-funnel" style="width:100%">
+          <div class="funnel-bar" style="width:100%"></div>
+          <div class="funnel-bar" style="width:72%"></div>
+          <div class="funnel-bar" style="width:48%"></div>
+          <div class="funnel-bar" style="width:28%"></div>
+          <div class="funnel-bar" style="width:14%"></div>
+        </div>
+      </div>
+      <div class="project-tags">
+        <span class="ptag">SQL</span>
+        <span class="ptag">GA4</span>
+        <span class="ptag">Excel</span>
+      </div>
+      <div class="project-title">Campaign Funnel Attribution Analysis</div>
+      <div class="project-desc">Multi-touch attribution model across paid search, social, email, and organic channels. Identified a 34% improvement in cost-per-acquisition by reallocating budget based on assisted conversion data.</div>
+      <a href="#" class="project-link">View Project →</a>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <div class="project-preview">
+        <div class="mini-line">
+          <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+            <polyline points="0,50 30,38 60,42 90,25 120,30 150,12 180,18 200,8" fill="none" stroke="#00d4aa" stroke-width="1.5" opacity="0.6"/>
+            <polyline points="0,55 30,50 60,52 90,44 120,46 150,35 180,38 200,30" fill="none" stroke="rgba(0,212,170,0.3)" stroke-width="1" stroke-dasharray="3,3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="project-tags">
+        <span class="ptag">Python</span>
+        <span class="ptag">Tableau</span>
+        <span class="ptag">PR</span>
+      </div>
+      <div class="project-title">PR Coverage &amp; Share of Voice Tracker</div>
+      <div class="project-desc">Automated media monitoring pipeline tracking brand mentions, sentiment, and share of voice across 50+ publications. Python ETL feeding a live Tableau dashboard updated weekly.</div>
+      <a href="#" class="project-link">View Project →</a>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card">
+      <div class="project-preview">
+        <div class="mini-dots">
+          <div class="mini-dot" style="width:10px;height:10px;background:#00d4aa;opacity:.2"></div>
+          <div class="mini-dot" style="width:14px;height:14px;background:#00d4aa;opacity:.5"></div>
+          <div class="mini-dot" style="width:8px;height:8px;background:#00d4aa;opacity:.2"></div>
+          <div class="mini-dot" style="width:18px;height:18px;background:#00d4aa;opacity:.9"></div>
+          <div class="mini-dot" style="width:10px;height:10px;background:#00d4aa;opacity:.3"></div>
+          <div class="mini-dot" style="width:12px;height:12px;background:#00d4aa;opacity:.4"></div>
+          <div class="mini-dot" style="width:20px;height:20px;background:#00d4aa;opacity:1"></div>
+          <div class="mini-dot" style="width:8px;height:8px;background:#00d4aa;opacity:.2"></div>
+          <div class="mini-dot" style="width:14px;height:14px;background:#00d4aa;opacity:.6"></div>
+          <div class="mini-dot" style="width:10px;height:10px;background:#00d4aa;opacity:.3"></div>
+          <div class="mini-dot" style="width:16px;height:16px;background:#00d4aa;opacity:.7"></div>
+          <div class="mini-dot" style="width:12px;height:12px;background:#00d4aa;opacity:.4"></div>
+          <div class="mini-dot" style="width:8px;height:8px;background:#00d4aa;opacity:.2"></div>
+          <div class="mini-dot" style="width:10px;height:10px;background:#00d4aa;opacity:.3"></div>
+          <div class="mini-dot" style="width:14px;height:14px;background:#00d4aa;opacity:.5"></div>
+        </div>
+      </div>
+      <div class="project-tags">
+        <span class="ptag">SQL</span>
+        <span class="ptag">Segmentation</span>
+        <span class="ptag">CRM</span>
+      </div>
+      <div class="project-title">Audience Segmentation &amp; Persona Modeling</div>
+      <div class="project-desc">SQL-driven customer segmentation across a 200k-record CRM database. RFM scoring model identifying high-value customer clusters to inform targeted ad creative and email sequences.</div>
+      <a href="#" class="project-link">View Project →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div class="fade-up">
+    <span class="section-tag">Inquiries</span>
+    <h2 class="section-title">Let's work<br>together.</h2>
+    <p class="section-sub">Available for full-time data analyst roles and consulting engagements in marketing intelligence, analytics strategy, and BI development.</p>
+    <div class="contact-info">
+      <span class="contact-label">Direct Communication</span>
+      <div class="contact-item">
+        <div class="ci-dot"></div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value">your.email@domain.com</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-dot"></div>
+        <div>
+          <div class="ci-label">Location</div>
+          <div class="ci-value">New Jersey</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="ci-dot"></div>
+        <div>
+          <div class="ci-label">LinkedIn</div>
+          <div class="ci-value">linkedin.com/in/yourprofile</div>
+        </div>
+      </div>
+      <div class="availability-card">
+        <div class="av-dot"></div>
+        <div class="av-text">Currently accepting new opportunities — open to full-time and contract roles</div>
+      </div>
+    </div>
+  </div>
+  <div class="fade-up">
+    <form class="contact-form" onsubmit="return false">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="First and last name">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Company / Role</label>
+        <input type="text" placeholder="Company name and your role">
+      </div>
+      <div class="form-group">
+        <label>Project Scope</label>
+        <textarea rows="4" placeholder="Briefly describe what you're working on or looking for..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary" style="width:100%;text-align:center">Send Inquiry</button>
+    </form>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-copy">© 2025 YourName · Marketing Data Analytics</div>
+  <div class="footer-links">
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+    <a href="#projects">Portfolio</a>
+  </div>
+</footer>
+
+<script>
+// Scroll fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Nav active state
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? '#f0f4f8' : '';
+  });
+});
+</script>
+</body>
+</html>
